@@ -1,7 +1,17 @@
-﻿
+﻿@model IPagedList<Article>
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>文章列表</h2>
 
+@foreach (var articel in Model)
+{
+    <div>
+        <span>@articel.Title</span>
+    </div>
+}
+
+@Html.PagedListPager(Model as IPagedList<Article>,
+    page => $"/Home/Index?pageIndex={page}")
