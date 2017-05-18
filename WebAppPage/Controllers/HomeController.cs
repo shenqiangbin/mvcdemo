@@ -26,5 +26,18 @@ namespace WebAppPage.Controllers
             var pageList = new StaticPagedList<Article>(response.List, pageIndex, pageSize, response.TotalCount);
             return View(pageList);
         }
+
+        public ActionResult AjaxIndex(int pageIndex = 1)
+        {
+            int pageSize = 2;
+            var response = articleService.GetPaged(pageSize, pageIndex);
+
+            var pageList = new StaticPagedList<Article>(response.List, pageIndex, pageSize, response.TotalCount);
+
+            if (Request.IsAjaxRequest())
+                return PartialView("_ArticleList", pageList);
+
+            return View(pageList);
+        }
     }
 }

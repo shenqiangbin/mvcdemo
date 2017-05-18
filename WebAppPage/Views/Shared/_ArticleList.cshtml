@@ -1,0 +1,28 @@
+﻿@model IPagedList<Article>
+
+<div id="articleList">
+    @foreach (var articel in Model)
+    {
+        <div>
+            <span>@articel.Title</span>
+        </div>
+    }
+
+
+    <div class="pagedList">
+        @Html.PagedListPager(Model as IPagedList<Article>,
+    page => $"/Home/ajaxIndex?pageIndex={page}")
+    </div>
+
+
+
+    <script type="text/javascript">
+        $("div.pagedList a").click(function () {
+            $.get($(this).attr("href"), $("form[name=workerForm]").serialize(), function (data) {
+                $("#articleList").replaceWith(data);
+            });
+            return false;
+        });
+    </script>
+
+</div>

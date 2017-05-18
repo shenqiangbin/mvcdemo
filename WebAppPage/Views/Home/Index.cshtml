@@ -15,3 +15,10 @@
 
 @Html.PagedListPager(Model as IPagedList<Article>,
     page => $"/Home/Index?pageIndex={page}")
+
+
+<p>
+    <div>
+        <a href="/home/ajaxIndex">ajax分页</a>
+    </div>
+</p>
